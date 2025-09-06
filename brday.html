@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diksha's Surprise 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: scroll;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 480px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      color: #ff4b7d;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin: 8px 0;
+      border: none;
+      background-color: #ff4b7d;
+      color: white;
+      font-size: 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff2e63;
+      transform: scale(1.05);
+    }
+
+    .memory {
+      display: none;
+      margin: 12px 0;
+      background: #ffe4ec;
+      padding: 12px;
+      border-radius: 12px;
+      color: #444;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      font-size: 15px;
+    }
+
+    .memory.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-message {
+      display: none;
+      margin-top: 18px;
+      font-size: 18px;
+      color: #ff2e63;
+      font-weight: bold;
+      animation: popUp 1s ease-in-out;
+    }
+
+    /* Falling Hearts */
+    .heart {
+      position: fixed;
+      color: red;
+      font-size: 20px;
+      top: -10px;
+      animation: fall 5s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes popUp {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Popup for "I Love You" */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff2e63;
+      animation: popUp 1s ease-in-out;
+      z-index: 1000;
+    }
+
+    /* Secret Love Letter */
+    #loveLetter {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 400px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      z-index: 2000;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #loveLetter h2 {
+      color: #ff2e63;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    #loveLetter p {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    #closeLetter {
+      margin-top: 15px;
+      background-color: #6a5acd;
+      font-size: 14px;
+    }
+
+    /* Music Button */
+    #musicBtn {
+      margin-top: 15px;
+      background-color: #6a5acd;
+      font-size: 14px;
+    }
+
+    /* Fireworks Canvas */
+    #fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    #warningPopup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #3b0918;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💌 Hey Dikshu! 💌</h1>
+    <p>Kuch dil ki baatein hidden hain… ek ek karke click karo 💕</p>
+
+    <button onclick="showMemory(1, 'Pata hai,main kbhi bol nhi pata,par tere bina sab kuch adhura sa lagta hai...Tere ek `haan`se din bnjata h,or tere ignore krne se rat udaas ho jati h.🥺❤')">🌸 Dil ka Sukoon</button>
+    <div class="memory" id="memory1"></div>
+
+    <button onclick="showMemory(2, 'Log kehte hain mohabbat tabhi hoti hai jab do log ek doosre ko chahein…Par main kehta hoon, mohabbat tab bhi hoti hai jab ek insaan poore dil se chahta hai.Tum meri adhoori mohabbat ho,par meri zindagi ka sabse khoobsurat ehsaas bhi. 💔')">🌿 Adhoori si mohabbat</button>
+    <div class="memory" id="memory2"></div>
+
+    <button onclick="showMemory(3, 'Mujhe tumse kuch nahi chahiye, Diksha…na mohabbat, na wafaa…Bas itna sa kaafi haiki jab tum hansogi,kahin na kahin, dil ke kone memera naam yaad aa jaye. 🕊 ✨')">🌙 Bas tere Muskan</button>
+    <div class="memory" id="memory3"></div>
+
+    <button onclick="showMemory(4, 'Tere saamne hazaar baatein hoti hain,par jo baat dil me hoti hai,wo shabd tak nahi pahuchti…aur shayad kabhi pahunch bhi na paaye. 🌿')">💫 unkahe Jazbat</button>
+    <div class="memory" id="memory4"></div>
+
+    <button onclick="showMemory(5, 'Tumhe pata bhi nahi,kitni baar apna naam tere saath soch karkhamoshi me muskurata hoon…aur fir usi khamoshi me toot bhi jaata hoon. 🌌')">🌈 Chupi hui Muskan</button>
+    <div class="memory" id="memory5"></div>
+
+    <button onclick="showMemory(6, 'Tumse baat hoti hai toh lagta haizindagi poori hai…aur baat ruk jaaye toh yaad aata hai kitne adhoore hain hum. 💭')">🕊 Tere bin</button>
+    <div class="memory" id="memory6"></div>
+
+    <button onclick="showMemory(7, 'Kisi ne mujhse poocha,teri khushi ka raaz kya hai?Main bas muskura diya…aur ek shabd bola — Diksha.Tumhara naam hi mere liye poori duniya hai. 💫')">💖 Tere Naam Ka raaz</button>
+    <div class="memory" id="memory7"></div>
+
+    <p class="final-message" id="finalMessage">🌟 Thank you, Diksha… tum meri kahani ka sabse khoobsurat hissa ho 🥺❤</p>
+    <div id="warningPopup"></div>
+
+    <!-- Music Control Button -->
+    <!-- <button id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
+  </div> -->
+
+  <!-- Final Popup -->
+  <div id="popup">💘 HAPPY BIRTHDAY DIKSHU😁🎁💘</div>
+
+  <!-- Secret Love Letter -->
+  <div id="loveLetter">
+    <h2>💌 My Heart's Letter for You 💌</h2>
+    <p>
+      Dikshu… tum meri zindagi ki sabse khoobsurat dua ho.  
+      Tum meri muskaan ho, meri strength ho, meri inspiration ho ❤  
+      Har memory, har baat, har moment… sirf tumse hi khaas hai.  
+      Aaj, kal, aur hamesha… bas tum meri kahani ho.  
+      I love you endlessly! 🥺❤
+    </p>
+    <button id="closeLetter" onclick="closeLoveLetter()">Close</button>
+  </div>
+
+  <!-- Fireworks Canvas -->
+  <canvas id="fireworks"></canvas>
+
+  <!-- Heeriye Song -->
+  <audio id="bgMusic" loop>
+    <source src="heeriye-heeriye-aa-aa-arijit-singh-punjabi-60840.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let count = 0;
+    let music = document.getElementById("bgMusic");
+    let musicBtn = document.getElementById("musicBtn");
+
+    // Typewriter Effect
+    function typeWriter(element, text, i = 0) {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(element, text, i + 1), 40);
+      }
+    }
+    function showWarning(message) {
+  const popup = document.getElementById("warningPopup");
+  popup.innerText = message;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2500); // Hide after 2.5 seconds
+}
+
+
+    // Sequential Memory Unlock
+function showMemory(clickedMemory, text) {
+  const totalMemories = 7;
+
+  // Prevent skipping memories
+  if (clickedMemory > count + 1) {
+    showWarning("❌ Dikshu, pehle Memory " + (count + 1) + " unlock karo! 🥰");
+    return;
+  }
+
+  // Prevent re-clicking already opened memory
+  if (clickedMemory <= count) {
+    return;
+  }
+
+  // If clicked memory exceeds total, reset to last valid one
+  if (clickedMemory > totalMemories) {
+    clickedMemory = totalMemories;
+  }
+
+  let memory = document.getElementById("memory" + clickedMemory);
+  memory.classList.add("show");
+  memory.innerHTML = "";
+  typeWriter(memory, text);
+  count++;
+
+  if (clickedMemory === 1) {
+    music.play().catch(e => {
+      console.log("Music autoplay was blocked by browser.");
+    });
+  }
+
+  if (count === totalMemories) {
+    setTimeout(() => {
+      document.getElementById("finalMessage").style.display = "block";
+      createHearts(60);
+      startFireworks();
+      setTimeout(() => {
+        document.getElementById("popup").style.display = "block";
+      }, 2500);
+      setTimeout(() => {
+        document.getElementById("loveLetter").style.display = "block";
+      }, 5000);
+    }, 800);
+  }
+}
+
+
+
+    // Music Control
+    // function toggleMusic() {
+    //   if (music.paused) {
+    //     music.play();
+    //     musicBtn.innerText = "⏸ Pause Music";
+    //   } else {
+    //     music.pause();
+    //     musicBtn.innerText = "▶ Play Music";
+    //   }
+    // }/
+
+    // Falling Hearts Animation
+    function createHearts(num) {
+      for (let i = 0; i < num; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 15 + 10 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+
+    // Fireworks Effect
+    function startFireworks() {
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let particles = [];
+      function createParticle() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height / 2;
+        const radius = Math.random() * 3 + 2;
+        const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        const speedX = (Math.random() - 0.5) * 6;
+        const speedY = (Math.random() - 0.5) * 6;
+        particles.push({ x, y, radius, color, speedX, speedY });
+      }
+
+      function drawParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.radius *= 0.96;
+          if (p.radius < 0.2) particles.splice(i, 1);
+        });
+        requestAnimationFrame(drawParticles);
+      }
+
+      setInterval(() => {
+        for (let i = 0; i < 20; i++) createParticle();
+      }, 300);
+
+      drawParticles();
+    }
+
+    // Close Love Letter
+    function closeLoveLetter() {
+      document.getElementById("loveLetter").style.display = "none";
+    }
+  </script>
+</body>
+</html>
